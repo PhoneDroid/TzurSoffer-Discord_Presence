@@ -20,6 +20,7 @@ class DiscordRichPresence(QtCore.QObject):
         self.clientId = clientId
         self.rpc = None
         self.timer = None
+        self.isWarned = False           #< only print the failure to connect once
         self.rpcSettings = {
             "state": "FreeCAD",
             "details": "No file open",
@@ -30,7 +31,7 @@ class DiscordRichPresence(QtCore.QObject):
 
     def startPresence(self):
         try:
-            print("Connecting to Discord...")
+            # print("Connecting to Discord...")
             self.rpc = Presence(self.clientId)
             self.rpc.connect()
 
@@ -38,10 +39,14 @@ class DiscordRichPresence(QtCore.QObject):
                 **self.rpcSettings
             )
 
-            print("Connected to Discord!")
-            self.startTimer()
+            print("Connected to Discord! If you enjoy this addon, please leave it a star on github https://github.com/TzurSoffer/FreecadDiscordPresence")
+            self.isWarned = False
+            return 0
         except Exception as e:
-            print(f"Failed to connect to Discord: {e}")
+            if self.isWarned == False:
+                print(f"Failed to connect to Discord: {e}")
+                self.isWarned = True
+            return -1
 
     def startTimer(self):
         """Start a timer to periodically update the Discord status."""
@@ -72,7 +77,9 @@ class DiscordRichPresence(QtCore.QObject):
                 **self.rpcSettings
             )
         except Exception as e:
-            print(f"Failed to update presence: {e}")
+            if self.isWarned == False:
+                print(f"Failed to update presence: {e}")
+                self.isWarned = True
             self.reconnect()
 
     def reconnect(self):
@@ -96,6 +103,7 @@ def runExtension():
     global discord_presence
     discord_presence = DiscordRichPresence(CLIENT_ID)
     discord_presence.startPresence()
+    discord_presence.startTimer()
 
 def stopExtension():
     """Stop the Discord Presence extension."""
