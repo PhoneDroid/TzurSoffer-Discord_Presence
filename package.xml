@@ -9,6 +9,8 @@
 
   <date>2025-09-22</date>
 
+  <depend>pypresence</depend>
+
   <maintainer email="tzur.soffer@gmail.com">Tzur Soffer</maintainer>
 
   <license file="LICENSE">LGPL-2.1-or-later</license>
