@@ -27,7 +27,7 @@
       <tag>Extension</tag>
       <tag>DiscordPresence</tag>
       <classname>DiscordPresence</classname>
-      <subdirectory>freecad/DiscordPresence</subdirectory>
+      <subdirectory>.</subdirectory>
     </workbench>
   </content>
 

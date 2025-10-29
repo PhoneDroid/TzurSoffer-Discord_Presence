@@ -1,0 +1,2 @@
+
+from .discordPresence import runExtension
