@@ -1,0 +1,12 @@
+
+[project]
+version = '0.0.0'
+name = 'Discord-Presence'
+
+requires-python = '>=3.10'
+
+dependencies = [
+    'freecad-stubs>=1.0.21' ,
+    'pypresence>=4.6.1' ,
+    'pyside6>=6.9.2'
+]
