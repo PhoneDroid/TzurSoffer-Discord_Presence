@@ -3,10 +3,9 @@ import FreeCAD
 from pypresence import Presence
 import time
 import re
-try:
-    from PySide2 import QtCore
-except:
-    from PySide import QtCore
+
+from .PySide import QtCore
+
 
 CLIENT_ID = "1315765680091693237"
 
